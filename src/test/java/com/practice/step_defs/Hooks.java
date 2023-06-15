@@ -28,7 +28,7 @@ public class Hooks {
 
     @Before("@ui")
     public void setUp() {
-        // we put a logic that should apply to every scenario
+
         Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
     }
