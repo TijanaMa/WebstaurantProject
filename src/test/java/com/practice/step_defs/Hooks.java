@@ -1,5 +1,6 @@
 package com.practice.step_defs;
 
+import com.practice.utilities.ConfigurationReader;
 import com.practice.utilities.DB_Util;
 import com.practice.utilities.Driver;
 import io.cucumber.java.After;
@@ -30,6 +31,8 @@ public class Hooks {
     public void setUp() {
 
         Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        Driver.getDriver().manage().window().maximize();
+        Driver.getDriver().get(ConfigurationReader.getProperty("demo_url"));
 
     }
 
