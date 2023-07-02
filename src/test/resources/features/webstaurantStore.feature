@@ -12,10 +12,11 @@ Feature: Webstaurant Store task
     And user empty the cart
     Then the cart should be empty
 
-#  We could implement --> Scenario Outline  (locators are different for different view)
+#  We could implement Scenario Outline  (locators are different for different view)
 #  In this case I didn't use it, I just went with default Grid view
 #    When user search for 'stainless work table' in <View> mode
 #    Examples:
 #      | View       |
 #      | Grid View  |
 #      | List View  |
+#  --> then I would use different locators for WebElement title

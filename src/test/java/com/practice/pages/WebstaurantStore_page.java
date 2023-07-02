@@ -24,8 +24,8 @@ public class WebstaurantStore_page {
     public List<WebElement> productTitle;
 
     //WebElement for checking the next page
-    @FindBy(xpath = "//a[@aria-label='page 2']")
-    public WebElement nextPageButton;
+//    @FindBy(xpath = "//a[@aria-label='page 2']")
+//    public WebElement nextPageButton;
 
     public void nextPageButtonMethod(int pageNum){
 

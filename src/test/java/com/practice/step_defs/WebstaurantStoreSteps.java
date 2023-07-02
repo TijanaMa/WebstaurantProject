@@ -43,12 +43,13 @@ public class WebstaurantStoreSteps {
         actions = new Actions(Driver.getDriver());
         wait = new WebDriverWait(Driver.getDriver(), 10);
 
-        boolean wordFound = true;
         int pageNum = 2;
+        boolean wordFound = true;
 
         while (true) {
-            wordFound = true;
+
             for (WebElement eachTitle : webstaurantStore.productTitle) {
+
                 actions.moveToElement(eachTitle).perform();
                 wait.until(ExpectedConditions.visibilityOf(eachTitle));
                 String title = eachTitle.getText();
@@ -57,7 +58,7 @@ public class WebstaurantStoreSteps {
                     break; //exit if in each is not found
                 }
             }
-            if (!wordFound) { // exiting if word is not found in any title
+            if (!wordFound) { // exiting if word is not found
                 break;
             }
 
@@ -80,7 +81,7 @@ public class WebstaurantStoreSteps {
         }
 
 
-        assertTrue("all titles contains keyword '" +keyword+ "' ", wordFound);
+        assertTrue("not all titles contain the keyword '" +keyword+ "' ", wordFound);
 
 
     }
