@@ -9,13 +9,10 @@ public class ConfigurationReader {
 
        private static Properties properties = new Properties();
 
-    // having static block because static runs first
       static {
 
           try {
-              // Create FileInputStream object to open file as a stream in Java memory
               FileInputStream file = new FileInputStream("configuration.properties");
-              // Load "properties" object with the "file" we opened using FileInputStream
               properties.load(file);
 
           } catch (IOException e) {
