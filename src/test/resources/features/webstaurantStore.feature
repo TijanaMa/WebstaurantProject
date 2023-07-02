@@ -1,3 +1,4 @@
+@wip
 Feature: Webstaurant Store task
   TC 1
   User should be able to search for specific product, all products should contain given word in its title,
