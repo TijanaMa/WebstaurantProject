@@ -27,9 +27,21 @@ public class WebstaurantStore_page {
 //    @FindBy(xpath = "//a[@aria-label='page 2']")
 //    public WebElement nextPageButton;
 
+    @FindBy(xpath ="//input[@data-testid='itemAddCart']" )
+    public List<WebElement>addToCartButtons;
+
+    @FindBy(className = "add-to-cart")
+    public List<WebElement>addCelokupno;
+
+
     public void nextPageButtonMethod(int pageNum){
 
-        Driver.getDriver().findElement(By.xpath("//a[@aria-label='page "+pageNum+"']")).click();
+        Driver.getDriver().findElement(By.xpath("//a[@aria-label='page " +pageNum+ "']")).click();
+
+    }
+    public void lastPageButtonMethod(int pageNum){
+
+        Driver.getDriver().findElement(By.xpath("//a[@aria-label='last page, page " + pageNum + "']")).click();
 
     }
 

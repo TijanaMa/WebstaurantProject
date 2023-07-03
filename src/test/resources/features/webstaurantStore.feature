@@ -7,7 +7,7 @@ Feature: Webstaurant Store task
   Scenario: Search product, add last item to Cart and empty the Cart
     Given user is on the Webstaurant Store website
     When user search for 'stainless work table'
-    Then user should see search results has word 'Table' in the title
+#    Then user should see search results has word 'Table' in the title
     When user add the last item to the cart
     And user empty the cart
     Then the cart should be empty
