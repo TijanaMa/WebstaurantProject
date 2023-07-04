@@ -1,4 +1,4 @@
-package com.practice.runner;
+package com.webstaurantstore.runner;
 
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
@@ -12,7 +12,7 @@ import org.junit.runner.RunWith;
                 "html:target/cucumber-report.html",
                 "json:target/cucumber.json"
         },
-        glue = "com/practice/step_defs",
+        glue = "com/webstaurantstore/step_defs",
         features = "src/test/resources/features",
         tags ="@wip",
         dryRun = false,

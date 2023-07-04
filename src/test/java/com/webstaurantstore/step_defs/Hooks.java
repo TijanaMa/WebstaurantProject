@@ -1,7 +1,6 @@
-package com.practice.step_defs;
+package com.webstaurantstore.step_defs;
 
-import com.practice.utilities.ConfigurationReader;
-import com.practice.utilities.Driver;
+import com.webstaurantstore.utilities.Driver;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
@@ -27,7 +26,7 @@ public class Hooks {
             final byte[] screenshot = ((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.BYTES);
             scenario.attach(screenshot, "image/png","screenshot");
         }
-       // Driver.closeDriver();
+         Driver.closeDriver();
     }
 
 

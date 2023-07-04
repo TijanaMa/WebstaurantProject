@@ -1,4 +1,4 @@
-package com.practice.utilities;
+package com.webstaurantstore.utilities;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;

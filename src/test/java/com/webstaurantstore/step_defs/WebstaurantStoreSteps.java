@@ -1,13 +1,13 @@
-package com.practice.step_defs;
+package com.webstaurantstore.step_defs;
 
-import com.practice.pages.WebstaurantStore_page;
-import com.practice.utilities.BrowserUtil;
-import com.practice.utilities.ConfigurationReader;
-import com.practice.utilities.Driver;
+import com.webstaurantstore.pages.WebstaurantStore_page;
+import com.webstaurantstore.utilities.ConfigurationReader;
+import com.webstaurantstore.utilities.Driver;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
+import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 
@@ -49,7 +49,7 @@ public class WebstaurantStoreSteps {
 
         while (true) {
 
-            for (WebElement eachTitle : webstaurantStore.productTitle) {
+            for (WebElement eachTitle : webstaurantStore.productTitleContains) {
 
                 wait.until(ExpectedConditions.visibilityOf(eachTitle));
                 actions.moveToElement(eachTitle).perform();
@@ -63,13 +63,10 @@ public class WebstaurantStoreSteps {
                 break;
             }
 
-
-
             try {
-                    //it will select next page
+                    // select next page
                     webstaurantStore.nextPageButtonMethod(pageNum);
-
-                    wait.until(ExpectedConditions.visibilityOfAllElements(webstaurantStore.productTitle));
+                    wait.until(ExpectedConditions.visibilityOfAllElements(webstaurantStore.productTitleContains));
 
                     //increment page number in every iteration
                     pageNum++;
@@ -90,8 +87,7 @@ public class WebstaurantStoreSteps {
             }
 
 
-            wait.until(ExpectedConditions.visibilityOfAllElements(webstaurantStore.productTitle));
-            //BrowserUtil.waitFor(1);
+            wait.until(ExpectedConditions.visibilityOfAllElements(webstaurantStore.productTitleContains));
         }
 
 
@@ -105,38 +101,52 @@ public class WebstaurantStoreSteps {
 
     @When("user add the last item to the cart")
     public void user_add_the_last_item_to_the_cart() {
+        wait = new WebDriverWait(Driver.getDriver(), 20);
 
 
-        WebElement addLastToCart = webstaurantStore.addToCartButtons.get(webstaurantStore.addToCartButtons.size()-1);
-      //  addLastToCart.click();
+        //adding last available product
+        WebElement addLastAvailableItemToCart = webstaurantStore.addToCartButtons.get(webstaurantStore.addToCartButtons.size()-1);
+        wait.until(ExpectedConditions.elementToBeClickable(addLastAvailableItemToCart));
+        addLastAvailableItemToCart.click();
 
-        WebElement proba = webstaurantStore.addCelokupno.get(webstaurantStore.addCelokupno.size()-1);
-        try {
-            proba.click(); //try to add last to cart
-        }catch (ElementNotInteractableException e){
-            System.out.println("Product out of stock:");
-            // if it's out of stock it will give exception and print which item is out of stock
-            webstaurantStore.productTitle.get(webstaurantStore.productTitle.size()-1).getText();
-            try {
-               addLastToCart.click(); //add last item in cart
-            }catch (NoSuchElementException addToCart){
-                addToCart.printStackTrace();
-            }
-        }
 
-        //div[@class='add-to-cart']//p[.='Out of Stock']
 
-        //verify message -  there is 1 item in cart
+        //verify notification showed - item is added to cart
+        WebElement notificationAddedToCart = Driver.getDriver().findElement(By.xpath("//h2[@class='notification__heading']"));
+        wait.until(ExpectedConditions.visibilityOf(notificationAddedToCart));
+        Assert.assertTrue("notification not present, item not added to cart",notificationAddedToCart.isDisplayed());
 
-    }
-    @When("user empty the cart")
-    public void user_empty_the_cart() {
-        //locate cart, empty cart
-    }
-    @Then("the cart should be empty")
-    public void the_cart_should_be_empty() {
-        //assertion
+        //verify  -  there is only 1 item in cart
+        WebElement viewCart = Driver.getDriver().findElement(By.xpath("//a[.='View Cart']"));
+        viewCart.click();
+
+        List<WebElement> itemsInCart = Driver.getDriver().findElements(By.xpath("//li//div[@class='cartItem ag-item gtm-product-auto ']"));
+        wait.until(ExpectedConditions.visibilityOfAllElements(itemsInCart));
+
+        int itemsCount = itemsInCart.size();
+        System.out.println("count of items present in cart: "+itemsCount);
+
+        Assert.assertEquals("there is more then 1 item in cart",1,itemsCount);
+
+
+
     }
 
 
+    @Then("user empty the cart and the cart should be empty")
+    public void userEmptyTheCartAndTheCartShouldBeEmpty() {
+
+        WebElement emptyCartButton = Driver.getDriver().findElement(By.xpath("//button[normalize-space()='Empty Cart']"));
+        emptyCartButton.click();
+        WebElement emptyCartPopUp = Driver.getDriver().findElement(By.xpath("//div//button[text()='Empty']"));
+        emptyCartPopUp.click();
+
+        //verify Cart is empty
+        WebElement emptyCartMessage = Driver.getDriver().findElement(By.xpath("//p[.='Your cart is empty.']"));
+
+        Assert.assertTrue(emptyCartMessage.isDisplayed());
+
+
+
+    }
 }

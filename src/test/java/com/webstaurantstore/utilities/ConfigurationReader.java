@@ -1,4 +1,4 @@
-package com.practice.utilities;
+package com.webstaurantstore.utilities;
 
 import java.io.FileInputStream;
 import java.io.IOException;

@@ -1,6 +1,6 @@
-package com.practice.pages;
+package com.webstaurantstore.pages;
 
-import com.practice.utilities.Driver;
+import com.webstaurantstore.utilities.Driver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -21,17 +21,18 @@ public class WebstaurantStore_page {
     public WebElement searchButton;
 
     @FindBy(xpath = "//span[contains(@class, 'block') and contains(text(), 'Table')]")
-    public List<WebElement> productTitle;
+    public List<WebElement> productTitleContains;
 
-    //WebElement for checking the next page
-//    @FindBy(xpath = "//a[@aria-label='page 2']")
-//    public WebElement nextPageButton;
+    @FindBy(xpath = "//span[@class='itemDescription description']//a")
+    public List<WebElement> productTitleInCart;
 
     @FindBy(xpath ="//input[@data-testid='itemAddCart']" )
     public List<WebElement>addToCartButtons;
 
-    @FindBy(className = "add-to-cart")
-    public List<WebElement>addCelokupno;
+
+
+
+
 
 
     public void nextPageButtonMethod(int pageNum){
