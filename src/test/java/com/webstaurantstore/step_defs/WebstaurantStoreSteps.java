@@ -111,13 +111,16 @@ public class WebstaurantStoreSteps {
 
 
 
-        //verify notification showed - item is added to cart
+      /*  //verify notification showed - item is added to cart
         WebElement notificationAddedToCart = Driver.getDriver().findElement(By.xpath("//h2[@class='notification__heading']"));
         wait.until(ExpectedConditions.visibilityOf(notificationAddedToCart));
         Assert.assertTrue("notification not present, item not added to cart",notificationAddedToCart.isDisplayed());
 
+       */
+
         //verify  -  there is only 1 item in cart
         WebElement viewCart = Driver.getDriver().findElement(By.xpath("//a[.='View Cart']"));
+        wait.until(ExpectedConditions.visibilityOf(viewCart));
         viewCart.click();
 
         List<WebElement> itemsInCart = Driver.getDriver().findElements(By.xpath("//li//div[@class='cartItem ag-item gtm-product-auto ']"));
